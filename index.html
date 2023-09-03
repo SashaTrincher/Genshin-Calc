@@ -4,18 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <header class="header">
+
+    </header>
     <main class="main">
-        <h1>How does it work?</h1>
-        <p>When you click the link below, you will be taken to another page where you must enter the number of primogems you now have in the <br>
-        text box in order for us to determine how many days are left before you reach soft pity and whether you have enough days till the next patch.
-        <br><br>
-        The format will be <br><br>
-         "Days Left:... for Soft Pity, Exceeds." Exceeds by... days (if exceeds, false will be written if not)"
-        </p>
-        <a href="./calc.html">Click me :D</a>
+        <div class="mainContainer">
+            <div class="counterContainer">
+                <h2 class="counterTitle">Wish Counter</h2>
+                <div class="counterWrapper">
+                    <p class="counterSub">How many primogems do you currently have?</p>
+                    <div class="inputWrapper" id="calc-div">
+                        <p class="primoTitle">Please write your:</p>
+                        <img class="primoImg" src="./img/primogem.wbpp.webp" alt="">
+                        <input class="primoImput" id="calc-inp" type="text">
+                    </div>
+                </div>
+                <div class="calcResContainer">
+                    <div class="calcResWrapper">
+                        <p class="farmLeft calcResultText">Days until soft pity: <span id="farm-res"></span></p>
+                        <p class="untPatch calcResultText">In time for next patch: <span id="ptc-calc"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+    <p id="countdown"></p>
+    <script src="./script.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
-const triggerButton = document.getElementById('cur-prim-trigger');
-const resOutput = document.getElementById('calc-res');
-const curPrimosInput = document.getElementById('cur-prim-imp');
+const farmOutput = document.getElementById('farm-res');
+const farmPatchOutput = document.getElementById('ptc-calc');
+const curPrimosInput = document.getElementById('calc-inp');
 let currentPrimos;
 const maxPrimos = 12800;
 
@@ -22,22 +22,58 @@ function checkDaysLeft(daysLeft) {
     const daysUntilPatch = parseInt(countdownText.split(' ')[0]);
 
     if (daysLeft <= daysUntilPatch) {
-        return 'False'
+        if (!farmPatchOutput.classList.contains('excTr')) {
+            farmPatchOutput.classList.add('excFls');
+        } else {
+            farmPatchOutput.classList.remove('excTr');
+            farmPatchOutput.classList.add('excFls');
+        }
+        return 'You are in time!'
     } else {
+        if (!farmPatchOutput.classList.contains('excFls')) {
+            farmPatchOutput.classList.add('excTr');
+        } else {
+            farmPatchOutput.classList.remove('excFls');
+            farmPatchOutput.classList.add('excTr');
+        }
         const exceedsDays = daysUntilPatch - daysLeft;
-        return `Exceeds by ${exceedsDays} days`;
+        return `You exceed by ${exceedsDays}`;
     }
 }
 
-triggerButton.addEventListener('click', () => {
-    let daysLeft = 0;
-    currentPrimos = parseFloat(curPrimosInput.value);
+curPrimosInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" || event.keyCode === 13) { 
 
-    do {
-        daysLeft++;
-        currentPrimos += 150;
-    } while (currentPrimos <= maxPrimos);
+        let daysLeft = 0;
+        currentPrimos = parseFloat(curPrimosInput.value);
 
-    console.log(`... ${currentPrimos} and ${daysLeft}`);
-    resOutput.innerHTML = `Days Left: ${daysLeft} for Soft Pity, Exceeds Countdown: ${checkDaysLeft(daysLeft)}`;
+        const testFunction = function() {
+            do {
+                daysLeft++;
+                currentPrimos += 150;
+            } while (currentPrimos <= maxPrimos);
+        
+            if (daysLeft <= 1) {
+                return 'Good luck on pulling! You have enough primogems!';
+            } else {
+                return `${daysLeft} until soft pity`;
+            }
+        }    
+
+        console.log(`... ${currentPrimos} and ${daysLeft}`);
+        farmOutput.innerHTML = `${testFunction()}`
+        farmPatchOutput.innerHTML = `${checkDaysLeft(daysLeft)}`;
+    }
+});
+
+
+const userInput = document.getElementById('calc-inp');
+const inpContainer = document.getElementById('calc-div');
+
+userInput.addEventListener('focus', () => {
+    inpContainer.classList.add('activeInp');
+});
+
+userInput.addEventListener('blur', () => {
+    inpContainer.classList.remove('activeInp');
 });
