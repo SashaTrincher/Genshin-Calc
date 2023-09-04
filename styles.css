@@ -9,6 +9,9 @@
     outline: none;
 
 }
+#countdown {
+    display: none;
+}
 .main {
     width: 100vw;
     height: 100vh;
